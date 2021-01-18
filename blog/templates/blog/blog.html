@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Raleway:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      .links li {
+        display: inline;
+      }
+      .links a {
+        color: aliceblue;
+        float: right;
+        text-decoration: none;
+        font-size: 20px;
+        margin-left: 20px;
+      }
+
+      #logo {
+        font-size: 30px;
+        color: aliceblue;
+        float: left;
+      }
+      .clear {
+        clear: both;
+      }
+      .navbar {
+        background-color: rgb(21, 36, 49);
+      }
+
+      .links a:hover {
+        color: brown;
+      }
+      .loggedin {
+        background-color: rgb(21, 36, 49);
+      }
+      .loggedin h3 {
+        color: rgb(248, 248, 248);
+        font-size: 15px;
+        text-align: center;
+      }
+      .loggedin button {
+        padding: 5px 15px;
+        background-color: rgb(250, 250, 250);
+        border-radius: 10px;
+        border: 1px solid rgb(253, 253, 253);
+        margin-left: 48%;
+      }
+      .mainbody {
+        height: 100%;
+        position: relative;
+      }
+
+      .txt h2 {
+        padding-top: 10px;
+        text-align: right;
+        font-size: 50px;
+        color: rgb(17, 8, 68);
+        font-family: "Indie Flower", cursive;
+      }
+
+      h1 {
+        color: rgb(71, 9, 134);
+        text-align: center;
+        font-size: 80px;
+        font-family: "Raleway", sans-serif;
+        font-family: "Dancing Script", cursive;
+      }
+
+      h2 {
+        color: rgb(47, 107, 65);
+        font-size: 50px;
+        text-align: center;
+        font-family: "Raleway", sans-serif;
+        font-family: "Dancing Script", cursive;
+      }
+
+      div.gallery {
+        margin: 35px;
+        border: 1px solid rgb(50, 13, 153);
+        float: left;
+        width: 300px;
+        height: 500px;
+        background-color: rgb(248, 248, 248);
+        border-radius: 10px;
+        position: relative;
+      }
+
+      div.gallery:hover {
+        border: 1px solid rgb(226, 15, 15);
+      }
+
+      div.gallery img {
+        width: 100%;
+        height: 300px;
+        border-radius: 5px;
+        border-radius: 10px;
+      }
+      .descriere h1 {
+        margin-top: 15px;
+        font-size: 30px;
+        text-align: center;
+      }
+      .descriere h2 {
+        margin-top: 15px;
+        font-size: 20px;
+        text-align: center;
+      }
+      .likes {
+        height: 50px;
+        width: 50px;
+        margin: auto;
+        padding-top: 20px;
+        margin-top: auto;
+        position: absolute;
+        bottom: 15px;
+        left: 40%;
+      }
+      .like-button {
+        padding: 5px 10px;
+        background-color: rgb(26, 180, 26);
+        border: 1px solid rgb(78, 123, 144);
+        border-radius: 7px;
+        color: white;
+      }
+      .dislike-button {
+        padding: 5px 10px;
+        background-color: rgb(177, 51, 29);
+        border: 1px solid #4e7b90;
+        border-radius: 7px;
+        color: white;
+      }
+      .likes h4 {
+        color: rgb(71, 9, 134);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <h1 id="logo">C.T</h1>
+        <ul class="links">
+          <li><a href="{% url 'home' %}">Acasa</a></li>
+          <li><a href="{% url 'desprenoi' %}">Despre noi</a></li>
+          <li><a href="{% url 'paginait' %}">Zona IT</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'autentificare' %}">Creare cont</a></li>
+          <li><a href="{% url 'loginpage' %}">Login</a></li>
+          <div class="clear"></div>
+        </ul>
+      </nav>
+    </header>
+    {% if user.is_authenticated %}
+    <div class="loggedin">
+      <h3>Logged in as {{user.username}}</h3>
+      <form action="{% url 'logoutuser' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="logoutbutton">Logout</button>
+      </form>
+    </div>
+
+    {% endif %}
+    <h1>Bine ati venit la pagina de Blog</h1>
+    <h1>{{error_logged}}</h1>
+    {% for blog in blogs %}
+    <div class="responsive">
+      <div class="gallery">
+        <a href="{% url 'posts' blog.id %}"
+          ><img src="{{blog.img.url}}" alt="none"
+        /></a>
+
+        <div class="descriere">
+          <h1>{{blog.title}}</h1>
+          <h2>{{blog.date}}</h2>
+          <div class="likes">
+            <form action="{% url 'blog_likes' %}" method="POST">
+              {%csrf_token%}
+              <input type="hidden" name="blog_id" value="{{blog.id}}" />
+              {% if user not in blog.liked.all %}
+              <button class="like-button" type="submit">Like</button>
+              {% else %}
+              <button class="dislike-button" type="submit">Dislike</button>
+              {% endif %}
+            </form>
+            <h4>{{blog.liked.all.count}} Likes</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </body>
+</html>

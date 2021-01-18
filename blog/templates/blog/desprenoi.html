@@ -1,0 +1,363 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Despre noi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      /* css pentru nav bar */
+      .links li {
+        display: inline;
+      }
+      .links a {
+        color: aliceblue;
+        float: right;
+        text-decoration: none;
+        font-size: 20px;
+        margin-left: 20px;
+      }
+
+      #logo {
+        font-size: 30px;
+        color: aliceblue;
+        float: left;
+      }
+      .clear {
+        clear: both;
+      }
+      .navbar {
+        background-color: rgb(21, 36, 49);
+      }
+
+      .links a:hover {
+        color: brown;
+      }
+      .loggedin {
+        background-color: rgb(21, 36, 49);
+      }
+      .loggedin h3 {
+        color: rgb(248, 248, 248);
+        font-size: 15px;
+        text-align: center;
+      }
+      .loggedin button {
+        padding: 5px 15px;
+        background-color: rgb(250, 250, 250);
+        border-radius: 10px;
+        border: 1px solid rgb(253, 253, 253);
+        margin-left: 48%;
+      }
+      /* css pentru about.img.galery */
+      div.gallery {
+        margin: 45px;
+        border: 1px solid #ccc;
+        float: left;
+        width: 180px;
+        height: 240px;
+        background-color: rgb(21, 36, 49);
+        border-radius: 5px;
+      }
+
+      div.gallery:hover {
+        border: 1px solid rgb(226, 15, 15);
+      }
+
+      div.gallery img {
+        
+        width: 100%;
+        height: 180px;
+        border-radius: 5px;
+      }
+
+      div.desc {
+        padding: 15px;
+        text-align: center;
+        color: white;
+      }
+      /* responsive part*/
+     
+      /* css pentr partea de text about */
+      .textpart1,
+      .textpart2 {
+        width: 50%;
+        height: 800px;
+        background-color: white;
+        overflow:auto;
+      }
+
+      h1 {
+        padding-top: 10px;
+        text-align: center;
+        font-size: 40px;
+        color: rgb(21, 36, 49);
+        font-family: "Indie Flower", cursive;
+      }
+      .textpart1 {
+        padding-top: 10px;
+        text-align: center;
+        font-size: 35px;
+        color: rgb(21, 36, 49);
+        font-family: "Indie Flower", cursive;
+        margin-left: 15px;
+      }
+      .textpart2 {
+        padding-top: 10px;
+        text-align: center;
+        font-size: 35px;
+        color: rgb(21, 36, 49);
+        font-family: "Indie Flower", cursive;
+        float: right;
+      }
+      .parte2block {
+        width: 100%;
+        height: 800px;
+        padding-right: 20px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <h1 id="logo">C.T</h1>
+        <ul class="links">
+          <li><a href="{% url 'home' %}">Acasa</a></li>
+          <li><a href="{% url 'desprenoi' %}">Despre noi</a></li>
+          <li><a href="{% url 'paginait' %}">Zona IT</a></li>
+          <li><a href="{% url 'blog' %}">Blog</a></li>
+          <li><a href="{% url 'autentificare' %}">Creare cont</a></li>
+          <li><a href="{% url 'loginpage' %}">Login</a></li>
+          <div class="clear"></div>
+        </ul>
+      </nav>
+    </header>
+    {% if user.is_authenticated %}
+    <div class="loggedin">
+      <h3>Logged in as {{user.username}}</h3>
+      <form action="{% url 'logoutuser' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="logoutbutton">Logout</button>
+      </form>
+    </div>
+    {% endif %}
+    <h1>Despre noi:</h1>
+    <div class="parte1block">
+      <div class="textpart1">
+        <p>
+          Secția Împrumut Casa Tineretului este una dintre secțiile Bibliotecii
+          Județene ” I. G. Bibicescu”.
+        </p>
+        <p>
+          Situată în centrul orașului, pe strada Crișan, nr. 25, în incinta
+          clădirii Casa Tineretului, această secție vine în sprijinul atât al
+          elevilor care frecventează grupul de unități de învățământ aflate în
+          zona Crișan, cât și al celorlalți utilizatori din municipiul
+          Drobeta-Turnu Severin, ori din județul Mehedinți.
+        </p>
+        <p>
+          Cu un număr de peste 55000 de documente, această secție acoperă toate
+          interesele de lectură ale utilizatorilor, profilul acesteia fiind
+          enciclopedic.
+        </p>
+      </div>
+    </div>
+    <div class="parte2block">
+      <div class="textpart2">
+        <p>
+          Documentele secției pot fi studiate atât în cadrul secției, cat și
+          prin intermediul împrumutului la domiciliu, pe o perioadă de două
+          săptămâni, cu posibilitate de prelungire.
+        </p>
+        <p>
+          Accesul la documente se face pe baza contractului de împrumut, pentru
+          emiterea căruia este nevoie doar de cartea de identitate a
+          utilizatorului, valabilitatea acestuia fiind de 5 ani. Emiterea
+          contractului pentru minori se face numai în prezența tutorelui legal
+          al minorului.
+        </p>
+        <p>
+          Secția Împrumut Casa Tineretului vine cu o gamă largă de servicii de
+          bibliotecă care pot satisface necesitățile utilizatorilor de lectură,
+          educație, hobby-uri și petrecerea timpului într-un mod cât mai plăcut.
+        </p>
+      </div>
+    </div>
+    <h1>Va prezentam o mica galerie foto a sectiei!</h1>
+    <div class="responsive">
+      <div class="gallery">
+      <a target="_blank" href="{%static 'img/1.jpg'%}">
+        <img src="{%static 'img/1.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Vedere catre intrarea in sectie!</div>
+      </div>
+    </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/2.jpg'%}">
+        <img src="{%static 'img/2.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Panoul pentru expozitii!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/3.jpg'%}">
+        <img src="{%static 'img/3.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Fotoliu minge si sala de lectura!</div>
+    </div>
+    <div class="responsive">  
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/5.jpg'%}">
+        <img src="{%static 'img/5.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Sala de lectura!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/7.jpg'%}">
+        <img src="{%static 'img/7.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Sala de lectura!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/8.jpg'%}">
+        <img src="{%static 'img/8.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Sala calculatoare si carti!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/9.jpg'%}">
+        <img src="{%static 'img/9.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Rafturi carti literatura straina!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/10.jpg'%}">
+        <img src="{%static 'img/10.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Rafturi carti literatura straina!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/11.jpg'%}">
+        <img src="{%static 'img/11.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Rafturi carti literatura straina!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/12.jpg'%}">
+        <img src="{%static 'img/12.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Rafturi carti literatura straina!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/13.jpg'%}">
+        <img src="{%static 'img/13.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Rafturi carti literatura straina!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/14.jpg'%}">
+        <img src="{%static 'img/14.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Rafturi carti literatura straina!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/15.jpg'%}">
+        <img src="{%static 'img/15.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Rafturi carti literatura straina!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/16.jpg'%}">
+        <img src="{%static 'img/16.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Sectiunea "Micul Print" / Carti copii</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/17.jpg'%}">
+        <img src="{%static 'img/17.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Sectiunea "Micul Print"/ Carti copii</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/18.jpg'%}">
+        <img src="{%static 'img/18.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Sectiunea "Micul Print"/ Carti copii</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/20.jpg'%}">
+        <img src="{%static 'img/20.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Literatura straina!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/21.jpg'%}">
+        <img src="{%static 'img/21.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">O mica expozitie de carte!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/22.jpg'%}">
+        <img src="{%static 'img/22.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Expozitie de carte!</div>
+    </div>
+  </div>
+    <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{%static 'img/23.jpg'%}">
+        <img src="{%static 'img/23.jpg'%}" width="600" height="400" />
+      </a>
+      <div class="desc">Panoul pentru expozitii!</div>
+    </div>
+  </div>
+    <div class="clearfix"></div>
+  </body>
+  
+</html>
