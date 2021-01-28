@@ -11,7 +11,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('blog/', include('blog.urls')),
     path('paginait/', include('paginait.urls')),
-    path('autentificare/', include('autentificare.urls')), aaa
+    path('autentificare/', include('autentificare.urls')),
 
 ]
 
