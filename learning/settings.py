@@ -27,7 +27,7 @@ SECRET_KEY = '+-d)r+t_n5+0jqo=h)-hi895uh!o15)ujv)2i9^=)sa%%jt#lk'
 DEBUG = False
 
 #DEBUG = bool(os.environ.get("DEBUG", False))
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['sectiacasatineretului.herokuapp.com']
 
 
 # Application definition
@@ -126,7 +126,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 django_heroku.settings(locals())
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
