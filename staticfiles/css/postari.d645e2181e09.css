@@ -1,0 +1,44 @@
+h1 {
+  color: rgb(71, 9, 134);
+  text-align: center;
+  font-size: 80px;
+  font-family: "Raleway", sans-serif;
+  font-family: "Dancing Script", cursive;
+}
+
+h2 {
+  color: rgb(47, 107, 65);
+  font-size: 50px;
+  text-align: center;
+  font-family: "Monoton", cursive;
+  font-family: "Cinzel Decorative", cursive;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pythonbody img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  border-radius: 10px;
+  border: 2px solid rgb(13, 3, 49);
+}
+
+.pythonbody h3 {
+  color: darkblue;
+  font-size: 30px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-family: "Dancing Script", cursive;
+}
+
+.pythonbody h4 {
+  color: rgb(78, 15, 15);
+  font-size: 20px;
+  text-align: center;
+}
