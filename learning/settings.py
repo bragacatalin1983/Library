@@ -25,6 +25,7 @@ SECRET_KEY = '+-d)r+t_n5+0jqo=h)-hi895uh!o15)ujv)2i9^=)sa%%jt#lk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
+
 DEBUG = bool(os.environ.get("DEBUG", False))
 ALLOWED_HOSTS = []
 
@@ -123,7 +124,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+django_heroku.settings(locals())
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
@@ -136,4 +137,3 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sectiaimpr.casatineretului@gmail.com'
 EMAIL_HOST_PASSWORD = 'davele20'
-django_heroku.settings(locals())
